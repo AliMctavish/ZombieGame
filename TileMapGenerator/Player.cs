@@ -12,7 +12,7 @@ namespace ZombieGame
 {
     internal class Player
     {
-        private float speed = 500;
+        private float speed = 300;
 
         private float rotationSpeed = 10;
         private Texture2D playerTexture { get; set; }
