@@ -8,7 +8,7 @@ namespace ZombieGame
 {
     public class FileManager
     {
-        List<string> tiles = new List<string>();
+        private List<string> tiles = new List<string>(4);
         public FileManager() 
         {
             for(int i = 0; i < tiles.Count; i++) 

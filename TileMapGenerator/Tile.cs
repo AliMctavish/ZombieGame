@@ -13,9 +13,10 @@ namespace ZombieGame
         private Texture2D tileTexture;
         private Vector2 tilePos; 
         
-        public Tile(string tileFilePath, Vector2 tilePos )
+        public Tile(int tileFilePath, Vector2 tilePos )
         {
-            tileTexture = Globals.content.Load<Texture2D>(tileFilePath);
+            //tileTexture = Globals.content.Load<Texture2D>(tileFilePath);
+            this.tilePos = tilePos;
         }
 
 

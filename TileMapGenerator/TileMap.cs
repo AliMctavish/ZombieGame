@@ -6,10 +6,26 @@ using System.Threading.Tasks;
 
 namespace ZombieGame
 {
-    internal class TileMap
+    internal class TileMap 
     {
 
 
+
+        public TileMap()
+        {
+
+            
+
+
+        }
+
+
+
+
+        public void Draw()
+        {
+            
+        }
 
 
 
