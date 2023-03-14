@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,18 +12,12 @@ namespace ZombieGame
 {
     internal class Tile
     {
-        private Texture2D tileTexture;
-        private Vector2 tilePos; 
-        
-        public Tile(int tileFilePath, Vector2 tilePos )
+        public Texture2D tileTexture;
+        public Vector2 tilePos; 
+        public Tile(int tileIndex, Vector2 tilePos , ContentManager content )
         {
-            //tileTexture = Globals.content.Load<Texture2D>(tileFilePath);
+            tileTexture = content.Load<Texture2D>($"Tiles/tile{tileIndex}");
             this.tilePos = tilePos;
         }
-
-
-
-
-
     }
 }

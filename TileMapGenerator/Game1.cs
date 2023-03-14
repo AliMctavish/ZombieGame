@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace ZombieGame
 {
@@ -31,6 +33,7 @@ namespace ZombieGame
         {
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteFont = Content.Load<SpriteFont>("spriteFont");
+            TileMap.tileGenerator(Content);
 
         }
 
@@ -48,8 +51,9 @@ namespace ZombieGame
         {
             GraphicsDevice.Clear(Color.Black);
             Globals.spriteBatch.Begin();
-            player.Draw();
+            TileMap.Draw();
             Globals.spriteBatch.DrawString(spriteFont, $"the rotation of object {Mouse.GetState().Position}", new Vector2(50, 50), Color.White);
+            player.Draw();
             Globals.spriteBatch.End();
 
             base.Draw(gameTime);

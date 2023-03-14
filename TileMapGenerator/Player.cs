@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ZombieGame
 {
-    internal class Player
+    internal class Player 
     {
         private float speed = 300;
 

@@ -14,7 +14,8 @@ namespace ZombieGame
         public static float time { get; set; } 
         public static SpriteBatch spriteBatch { get; set; }
 
-        public static ContentManager content { get; set; }
+        public static ContentManager content { get; set; } 
+
 
         public static void Update(GameTime gameTime)
         {

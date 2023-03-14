@@ -8,13 +8,10 @@ namespace ZombieGame
 {
     public class FileManager
     {
-        private List<string> tiles = new List<string>(4);
+        private string[] tiles = {"Tiles/tile1" , "Tiles/tile2" , "Tiles/tile3" , "Tiles/tile4" };
         public FileManager() 
         {
-            for(int i = 0; i < tiles.Count; i++) 
-            {
-                tiles.Add($"Tiles/tile{i}");
-            }
+           
         }
     }
 }
