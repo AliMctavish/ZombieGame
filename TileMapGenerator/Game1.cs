@@ -40,6 +40,11 @@ namespace ZombieGame
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
+            if(Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                TileMap.tileList.Clear();
+                TileMap.tileGenerator(Content);
+            }
             Globals.Update(gameTime);
             InputManager.Update();
             player.Update();

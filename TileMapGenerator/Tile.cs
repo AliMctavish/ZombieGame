@@ -14,10 +14,12 @@ namespace ZombieGame
     {
         public Texture2D tileTexture;
         public Vector2 tilePos; 
-        public Tile(int tileIndex, Vector2 tilePos , ContentManager content )
+     
+         public Tile TileTexture(int tileIndex, Vector2 tilePos, ContentManager content)
         {
             tileTexture = content.Load<Texture2D>($"Tiles/tile{tileIndex}");
             this.tilePos = tilePos;
+            return this;
         }
     }
 }
