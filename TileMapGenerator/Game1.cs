@@ -58,6 +58,7 @@ namespace ZombieGame
             Globals.spriteBatch.Begin();
             TileMap.Draw();
             Globals.spriteBatch.DrawString(spriteFont, $"the rotation of object {Mouse.GetState().Position}", new Vector2(50, 50), Color.White);
+            Globals.spriteBatch.DrawString(spriteFont, $"player coordinate {player.playerPos}", new Vector2(50, 100), Color.White);
             player.Draw();
             Globals.spriteBatch.End();
 

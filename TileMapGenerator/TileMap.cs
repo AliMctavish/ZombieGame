@@ -19,7 +19,7 @@ namespace ZombieGame
                 for (int j = 0; j < 10; j++)
                 {
                     Tile tile = new Tile();
-                    tile.TileTexture(rnd.Next(1, 4), new Vector2(j * 200, i * 200) , content);
+                    tile = tile.TileTexture(rnd.Next(1, 4), new Vector2(j * 200, i * 200) , content);
                     tileList.Add(tile);
                 }
             }
