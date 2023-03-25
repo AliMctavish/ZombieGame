@@ -14,16 +14,12 @@ namespace ZombieGame
     internal class Player 
     {
         private float speed = 300;
-
         private float rotationSpeed = 10;
         private Texture2D playerTexture { get; set; }
         public Vector2 playerPos { get; set; }
         private Vector2 origin { get; set; }
-
         public float rotation;
-
         private Color[] texutreData;
-
         public Player(int posX , int posY , GraphicsDevice graphics)
         {
             playerPos= new Vector2(posX, posY);
@@ -34,10 +30,8 @@ namespace ZombieGame
                 texutreData[i] = Color.White;
             }
             playerTexture.SetData(texutreData);
-
             origin = new Vector2(playerTexture.Width / 2, playerTexture.Height / 2);
         }
-
         public void Update()
         {
             MouseState mouseState = Mouse.GetState();

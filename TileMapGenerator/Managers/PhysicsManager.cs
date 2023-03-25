@@ -20,6 +20,15 @@ namespace ZombieGame.EnemyFiles
                     movDir.Normalize();
                     enemy.enemyPos -= movDir;
                 }
+                foreach (Projectile projectile in Projectile.projectileList)
+                {
+                    if (Vector2.Distance(enemy.enemyPos, projectile.position) <= 50)
+                    {
+                        Vector2 movDir = projectile.position - enemy.enemyPos;
+                        movDir.Normalize();
+                        enemy.enemyPos -= movDir;
+                    }
+                }
             }
         }
     }

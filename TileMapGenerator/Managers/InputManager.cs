@@ -13,6 +13,7 @@ namespace ZombieGame.Managers
     public static class InputManager
     {
         public static Vector2 move;
+        public static MouseState mouseState = Mouse.GetState();
         public static void Update()
         {
             var state = Keyboard.GetState();
