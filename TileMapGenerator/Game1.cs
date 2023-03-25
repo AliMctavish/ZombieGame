@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
+using ZombieGame.EnemyFiles;
+using ZombieGame.Managers;
+using Enemy = ZombieGame.EnemyFiles.Enemy;
 
 namespace ZombieGame
 {
@@ -11,6 +14,8 @@ namespace ZombieGame
         private GraphicsDeviceManager _graphics;
         private SpriteFont spriteFont;
         private Player player;
+        private EnemyManager enemyManager;
+        PhysicsManager physicsManager = new PhysicsManager();
 
         public Game1()
         {
@@ -20,23 +25,19 @@ namespace ZombieGame
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
-
         protected override void Initialize()
         {
             player = new Player(_graphics.PreferredBackBufferWidth/2,_graphics.PreferredBackBufferHeight/2,GraphicsDevice);
-
+            Globals.graphics = GraphicsDevice;
+            enemyManager = new EnemyManager();
             base.Initialize();
-
         }
-
         protected override void LoadContent()
         {
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteFont = Content.Load<SpriteFont>("spriteFont");
             TileMap.tileGenerator(Content);
-
         }
-
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
@@ -46,9 +47,14 @@ namespace ZombieGame
                 TileMap.tileGenerator(Content);
             }
             Globals.Update(gameTime);
+            enemyManager.Update(gameTime);
             InputManager.Update();
+            physicsManager.enemyMovement(player);
             player.Update();
-
+            foreach(Enemy enemy in Enemy.enemyList)
+            {
+                enemy.Update(player);
+            }
             base.Update(gameTime);
         }
 
@@ -59,6 +65,7 @@ namespace ZombieGame
             TileMap.Draw();
             Globals.spriteBatch.DrawString(spriteFont, $"the rotation of object {Mouse.GetState().Position}", new Vector2(50, 50), Color.White);
             Globals.spriteBatch.DrawString(spriteFont, $"player coordinate {player.playerPos}", new Vector2(50, 100), Color.White);
+            enemyManager.Draw();
             player.Draw();
             Globals.spriteBatch.End();
 

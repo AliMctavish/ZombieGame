@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZombieGame.Managers;
 
 namespace ZombieGame
 {
-     static class TileMap 
+    static class TileMap 
     {
         public static List<Tile> tileList = new List<Tile>();
         static Random rnd = new Random();

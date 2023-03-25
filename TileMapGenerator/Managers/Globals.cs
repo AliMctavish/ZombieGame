@@ -7,19 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZombieGame
+namespace ZombieGame.Managers
 {
     public static class Globals
     {
-        public static float time { get; set; } 
+        public static float time { get; set; }
         public static SpriteBatch spriteBatch { get; set; }
-
-        public static ContentManager content { get; set; } 
-
-
+        public static ContentManager content { get; set; }
+        public static GraphicsDevice graphics { get; set; }
         public static void Update(GameTime gameTime)
         {
-            time = (float)gameTime.ElapsedGameTime.TotalSeconds;  
+            time = (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
     }
