@@ -17,7 +17,6 @@ namespace ZombieGame
         private Color[] textureData;
         private Texture2D projectileTexure;
         public static List<Projectile> projectileList = new List<Projectile>();
-
         public Projectile(Player player , GraphicsDevice graphics)
         {
             position= new Vector2(player.playerPos.X , player.playerPos.Y) ;
@@ -32,10 +31,8 @@ namespace ZombieGame
         }
         public void Update()
         {
-            
 
         }
-
         public void Draw()
         {
             Globals.spriteBatch.Draw(projectileTexure, position, Color.White);
