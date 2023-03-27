@@ -74,7 +74,8 @@ namespace ZombieGame
             player.Draw();
             foreach(Projectile projectile in Projectile.projectileList)
             {
-            projectile.Draw();
+                projectile.Update();
+                projectile.Draw();
             }
             Globals.spriteBatch.End();
 

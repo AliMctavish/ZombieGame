@@ -38,7 +38,7 @@ namespace ZombieGame
             playerPos = InputManager.move * Globals.time * speed;
             Math.Clamp(playerPos.X, 10, 1200);
             Math.Clamp(playerPos.Y, 10, 600);
-            rotation = (float)Math.Atan2(mouseState.Y - playerPos.Y, mouseState.X - playerPos.X);
+            rotation = (float)Math.Atan2(mouseState.Y - playerPos.Y, mouseState.X - playerPos.X);      
         }
         public void Draw()
         {
