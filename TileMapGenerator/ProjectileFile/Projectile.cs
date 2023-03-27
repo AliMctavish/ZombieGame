@@ -32,7 +32,6 @@ namespace ZombieGame
                 textureData[i] = Color.Black;    
             }
             projectileTexure.SetData(textureData);
-
         }
         public void Update()
         {
@@ -43,7 +42,7 @@ namespace ZombieGame
             MouseState mouseState = Mouse.GetState();
             Vector2 movDir = this.position - mouseState.Position.ToVector2();
             movDir.Normalize();
-            this.position -= movDir;
+            this.position -= movDir * 2;
             velocity += 1;
         }
         public void Draw()
