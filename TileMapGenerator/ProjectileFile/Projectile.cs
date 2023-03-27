@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,10 @@ namespace ZombieGame
         }
         public void shooting()
         {
-            position += new Vector2(1,1);
+            MouseState mouseState = Mouse.GetState();
+            Vector2 movDir = this.position - mouseState.Position.ToVector2();
+            movDir.Normalize();
+            this.position -= movDir;
             velocity += 1;
         }
         public void Draw()
