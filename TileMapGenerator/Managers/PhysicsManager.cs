@@ -29,7 +29,7 @@ namespace ZombieGame.EnemyFiles
                         enemy.enemyPos -= movDir;
                         Enemy.enemyList.Remove(enemy);
                     }
-                    if(Projectile.projectileList.Count > 30)
+                    if(Projectile.projectileList.Count > 100)
                     {
                         Projectile.projectileList.RemoveAt(0);
                     }

@@ -21,24 +21,23 @@ namespace ZombieGame
         private Texture2D projectileTexure;
         private Player GetPlayer;
         float mousePosX,mousePosY;
-        
+        Random rand= new Random();
         public static List<Projectile> projectileList = new List<Projectile>();
+        List<Color> colors = new List<Color>() { Color.Red, Color.Blue, Color.BurlyWood, Color.Black };
         public Projectile(Player player , GraphicsDevice graphics)
         {
             GetPlayer = player;
             position= new Vector2(player.playerPos.X , player.playerPos.Y) ;
             textureData = new Color[20 * 20];
             projectileTexure = new Texture2D(graphics,20,20);
-            
+            Color randomColor = colors[rand.Next(0,3)];
             for(int i = 0; i < textureData.Length; i++)
             {
-                textureData[i] = Color.Black;    
+                textureData[i] = randomColor;    
             }
             projectileTexure.SetData(textureData);
-
-            mousePosX = Mouse.GetState().X;
-            mousePosY = Mouse.GetState().Y;
-
+            mousePosX = Mouse.GetState().X ;
+            mousePosY = Mouse.GetState().Y ;
         }
         public void Update()
         {
@@ -46,14 +45,11 @@ namespace ZombieGame
         }
         public void shooting()
         {
-
-            MouseState mouseState = Mouse.GetState();
-         
-            Vector2 mousePos = new Vector2(mousePosX, mousePosY);
-            Vector2 movDir = this.position - mousePos ;
+            Vector2 mousePos = new Vector2(mousePosX,mousePosY);
+            Vector2 movDir = this.position - mousePos;
             movDir.Normalize();
-            this.position -= movDir* 12;
-            velocity += 1;
+            velocity -= 3f;
+            this.position -= movDir * 10 ;
         }
         public void Draw()
         {

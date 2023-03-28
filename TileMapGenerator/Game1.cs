@@ -28,7 +28,7 @@ namespace ZombieGame
         }
         protected override void Initialize()
         {
-            player = new Player(_graphics.PreferredBackBufferWidth/2,_graphics.PreferredBackBufferHeight/2,GraphicsDevice);
+            player = new Player(787,200, GraphicsDevice);
             Globals.graphics = GraphicsDevice;
             enemyManager = new EnemyManager();
             base.Initialize();

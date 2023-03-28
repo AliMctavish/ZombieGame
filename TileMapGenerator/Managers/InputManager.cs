@@ -12,7 +12,7 @@ namespace ZombieGame.Managers
 {
     public static class InputManager
     {
-        public static Vector2 move;
+        public static Vector2 move = new Vector2(50,50);
         public static MouseState mouseState = Mouse.GetState();
         public static void Update()
         {
