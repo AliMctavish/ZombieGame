@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -19,6 +20,8 @@ namespace ZombieGame
         private Color[] textureData;
         private Texture2D projectileTexure;
         private Player GetPlayer;
+        float mousePosX,mousePosY;
+        
         public static List<Projectile> projectileList = new List<Projectile>();
         public Projectile(Player player , GraphicsDevice graphics)
         {
@@ -32,6 +35,10 @@ namespace ZombieGame
                 textureData[i] = Color.Black;    
             }
             projectileTexure.SetData(textureData);
+
+            mousePosX = Mouse.GetState().X;
+            mousePosY = Mouse.GetState().Y;
+
         }
         public void Update()
         {
@@ -39,10 +46,14 @@ namespace ZombieGame
         }
         public void shooting()
         {
+
             MouseState mouseState = Mouse.GetState();
-            Vector2 movDir = this.position - mouseState.Position.ToVector2();
+         
+            Vector2 mousePos = new Vector2(mousePosX,mousePosY);
+            Vector2 movDir = this.position - mousePos;
             movDir.Normalize();
-            this.position -= movDir * 2;
+            this.position -= movDir * velocity;
+
             velocity += 1;
         }
         public void Draw()
