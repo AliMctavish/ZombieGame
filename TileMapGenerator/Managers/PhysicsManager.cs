@@ -20,7 +20,7 @@ namespace ZombieGame.EnemyFiles
                     movDir.Normalize();
                     enemy.enemyPos -= movDir;
                 }
-                foreach (Projectile projectile in Projectile.projectileList)
+                foreach (Projectile projectile in Projectile.projectileList.ToList())
                 {
                     if (Vector2.Distance(enemy.enemyPos, projectile.position) <= 50)
                     {
@@ -28,6 +28,10 @@ namespace ZombieGame.EnemyFiles
                         movDir.Normalize();
                         enemy.enemyPos -= movDir;
                         Enemy.enemyList.Remove(enemy);
+                    }
+                    if(Projectile.projectileList.Count > 30)
+                    {
+                        Projectile.projectileList.RemoveAt(0);
                     }
                 }
             }
