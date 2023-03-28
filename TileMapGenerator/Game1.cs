@@ -57,6 +57,10 @@ namespace ZombieGame
             InputManager.Update();
             physicsManager.enemyMovement(player);
             player.Update();
+            if(Projectile.projectileList.Count > 2000)
+            {
+                //Projectile.projectileList.Clear();
+            }
             foreach(Enemy enemy in Enemy.enemyList)
             {
                 enemy.Update(player);
@@ -70,6 +74,7 @@ namespace ZombieGame
             TileMap.Draw();
             Globals.spriteBatch.DrawString(spriteFont, $"the rotation of object {Mouse.GetState().Position}", new Vector2(50, 50), Color.White);
             Globals.spriteBatch.DrawString(spriteFont, $"player coordinate {player.playerPos}", new Vector2(50, 100), Color.White);
+            Globals.spriteBatch.DrawString(spriteFont, $"number of projectiles {Projectile.projectileList.Count}", new Vector2(50, 150), Color.White);
             enemyManager.Draw();
             player.Draw();
             foreach(Projectile projectile in Projectile.projectileList)

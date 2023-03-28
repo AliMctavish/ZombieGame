@@ -49,11 +49,10 @@ namespace ZombieGame
 
             MouseState mouseState = Mouse.GetState();
          
-            Vector2 mousePos = new Vector2(mousePosX,mousePosY);
-            Vector2 movDir = this.position - mousePos;
+            Vector2 mousePos = new Vector2(mousePosX, mousePosY);
+            Vector2 movDir = this.position - mousePos ;
             movDir.Normalize();
-            this.position -= movDir * velocity;
-
+            this.position -= movDir* 12;
             velocity += 1;
         }
         public void Draw()
