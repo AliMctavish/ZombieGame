@@ -16,7 +16,7 @@ namespace ZombieGame
     internal class Projectile
     {
         public Vector2 position;
-        public float velocity = 200f;
+        public float velocity = 1000f;
         private Color[] textureData;
         private Texture2D projectileTexure;
         private Vector2 origin;
@@ -50,7 +50,7 @@ namespace ZombieGame
             Vector2 mousePos = new Vector2(mousePosX,mousePosY);
             Vector2 movDir =  mousePos - origin ;
             movDir.Normalize();
-            this.position += origin * movDir   * Globals.time ;
+            this.position += movDir * Globals.time * velocity ;
         }
         public void Draw()
         {

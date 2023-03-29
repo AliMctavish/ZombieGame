@@ -24,10 +24,14 @@ namespace ZombieGame.EnemyFiles
                 {
                     if (Vector2.Distance(enemy.enemyPos, projectile.position) <= 50)
                     {
-                        Vector2 movDir = projectile.position - enemy.enemyPos;
+                        Vector2 movDir = projectile.position + enemy.enemyPos;
                         movDir.Normalize();
-                        enemy.enemyPos -= movDir;
+                        enemy.enemyPos -= movDir ;
+                        enemy.Health -= 1;
+                        if(enemy.Health <= 0)
+                        {
                         Enemy.enemyList.Remove(enemy);
+                        }
                     }
                     if(Projectile.projectileList.Count > 100)
                     {

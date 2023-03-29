@@ -17,6 +17,7 @@ namespace ZombieGame.EnemyFiles
         public Texture2D enemyTexture;
         private Color[] textureData;
         private float rotation;
+        public float Health = 100;
         private Vector2 origin;
         public static List<Enemy> enemyList = new List<Enemy>();
         public Enemy(int posX, int posY)
