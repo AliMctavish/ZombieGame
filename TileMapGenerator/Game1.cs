@@ -16,7 +16,7 @@ namespace ZombieGame
         private Player player;
         private Projectile projectile;
         private EnemyManager enemyManager;
-        PhysicsManager physicsManager = new PhysicsManager();
+        PhysicsManager physicsManager;
 
         public Game1()
         {
@@ -30,6 +30,7 @@ namespace ZombieGame
         {
             player = new Player(787,200, GraphicsDevice);
             Globals.graphics = GraphicsDevice;
+            physicsManager = new PhysicsManager(player);
             enemyManager = new EnemyManager();
             base.Initialize();
         }
@@ -55,7 +56,7 @@ namespace ZombieGame
             Globals.Update(gameTime);
             enemyManager.Update(gameTime);
             InputManager.Update();
-            physicsManager.enemyMovement(player);
+            physicsManager.enemyMovement();
             player.Update();
             if(Projectile.projectileList.Count > 2000)
             {

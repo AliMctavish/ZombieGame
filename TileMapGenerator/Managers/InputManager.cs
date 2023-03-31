@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,6 +15,7 @@ namespace ZombieGame.Managers
     {
         public static Vector2 move = new Vector2(50,50);
         public static MouseState mouseState = Mouse.GetState();
+        public static bool playerIsJumping = false;
         public static void Update()
         {
             var state = Keyboard.GetState();
@@ -21,6 +23,7 @@ namespace ZombieGame.Managers
             if (state.IsKeyDown(Keys.D)) move.X++;
             if (state.IsKeyDown(Keys.W)) move.Y--;
             if (state.IsKeyDown(Keys.S)) move.Y++;
+            if (state.IsKeyDown(Keys.Space)) playerIsJumping = true ;
         }
     }
 }

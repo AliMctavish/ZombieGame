@@ -10,7 +10,16 @@ namespace ZombieGame.EnemyFiles
 {
     internal class PhysicsManager
     {
-        public void enemyMovement(Player player)
+        Player player;
+
+        public PhysicsManager(Player player) 
+        {
+            this.player = player;
+        }
+
+
+
+        public void enemyMovement()
         {
             foreach (Enemy enemy in Enemy.enemyList.ToList())
             {
@@ -26,7 +35,7 @@ namespace ZombieGame.EnemyFiles
                     {
                         Vector2 movDir = projectile.position + enemy.enemyPos;
                         movDir.Normalize();
-                        enemy.enemyPos -= movDir ;
+                        enemy.enemyPos += movDir ;
                         enemy.Health -= 1;
                         if(enemy.Health <= 0)
                         {
@@ -40,5 +49,7 @@ namespace ZombieGame.EnemyFiles
                 }
             }
         }
+
+    
     }
 }

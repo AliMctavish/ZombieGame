@@ -24,7 +24,7 @@ namespace ZombieGame
         float mousePosX,mousePosY;
         Random rand= new Random();
         public static List<Projectile> projectileList = new List<Projectile>();
-        List<Color> colors = new List<Color>() { Color.Red, Color.Blue, Color.BurlyWood, Color.Black };
+        List<Color> colors = new List<Color>() { Color.Red, Color.Blue, Color.Yellow, Color.Black };
         public Projectile(Player player , GraphicsDevice graphics)
         {
             GetPlayer = player;
