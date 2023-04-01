@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using ZombieGame.EnemyFiles;
 using ZombieGame.Managers;
+using ZombieGame.ProjectileFile;
 using Enemy = ZombieGame.EnemyFiles.Enemy;
 
 namespace ZombieGame
@@ -43,15 +44,20 @@ namespace ZombieGame
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
-            if(Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                TileMap.tileList.Clear();
-                TileMap.tileGenerator(Content);
-            }
+            //if(Keyboard.GetState().IsKeyDown(Keys.Space))
+            //{
+            //    TileMap.tileList.Clear();
+            //    TileMap.tileGenerator(Content);
+            //}
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 Projectile projectile = new Projectile(player, GraphicsDevice);
                 Projectile.projectileList.Add(projectile);
+            } 
+            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            {
+                Projectile shotGunProjectiles = new ShotGun(player, GraphicsDevice);
+                Projectile.projectileList.Add(shotGunProjectiles);
             }
             Globals.Update(gameTime);
             enemyManager.Update(gameTime);

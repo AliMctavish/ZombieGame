@@ -18,10 +18,10 @@ namespace ZombieGame
         public Vector2 position;
         public float velocity = 1000f;
         private Color[] textureData;
-        private Texture2D projectileTexure;
-        private Vector2 origin;
+        public Texture2D projectileTexure;
+        public Vector2 origin;
         private Player GetPlayer;
-        float mousePosX,mousePosY;
+        public float mousePosX,mousePosY;
         Random rand= new Random();
         public static List<Projectile> projectileList = new List<Projectile>();
         List<Color> colors = new List<Color>() { Color.Red, Color.Blue, Color.Yellow, Color.Black };
@@ -41,18 +41,18 @@ namespace ZombieGame
             mousePosY = Mouse.GetState().Y ;
             origin = new Vector2(position.X, position.Y);
         }
-        public void Update()
+        public virtual void Update()
         {
             shooting();
         }
-        public void shooting()
+        public virtual void shooting()
         {
             Vector2 mousePos = new Vector2(mousePosX,mousePosY);
             Vector2 movDir =  mousePos - origin ;
             movDir.Normalize();
             this.position += movDir * Globals.time * velocity ;
         }
-        public void Draw()
+        public virtual void Draw()
         {
             Globals.spriteBatch.Draw(projectileTexure, position, Color.White);
         }
