@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZombieGame.Managers;
+using ZombieGame.ProjectileFile;
 
 namespace ZombieGame.EnemyFiles
 {
@@ -29,9 +30,18 @@ namespace ZombieGame.EnemyFiles
                 {
                     if (Vector2.Distance(enemy.enemyPos, projectile.position) <= 50)
                     {
-                        Vector2 movDir = projectile.position + enemy.enemyPos;
+                        if(projectile.GetType() == typeof(Projectile))
+                        {
+                        Vector2 movDir = projectile.position + enemy.enemyPos; 
                         movDir.Normalize();
                         enemy.enemyPos += movDir ;
+                        }
+                        if(projectile.GetType() == typeof(ShotGun))
+                        {
+                        Vector2 movDir = projectile.position - enemy.enemyPos;
+                        movDir.Normalize();
+                        enemy.enemyPos -= movDir * 2;
+                        }
                         enemy.Health -= 1;
                         if(enemy.Health <= 0)
                         {

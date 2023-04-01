@@ -17,7 +17,7 @@ namespace ZombieGame
     {
         public Vector2 position;
         public float velocity = 1000f;
-        private Color[] textureData;
+        public Color[] textureData;
         public Texture2D projectileTexure;
         public Vector2 origin;
         private Player GetPlayer;

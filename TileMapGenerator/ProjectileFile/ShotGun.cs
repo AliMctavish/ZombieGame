@@ -32,12 +32,13 @@ namespace ZombieGame.ProjectileFile
             Vector2 mousePos = new Vector2(mousePosX, mousePosY);
             Vector2 movDir = mousePos - origin ;
 
-            float num = 1f / MathF.Sqrt(movDir.X * movDir.X   +  movDir.Y * movDir.Y);
+            float num =  1f  /  MathF.Sqrt(movDir.X * movDir.X   +  movDir.Y * movDir.Y);
 
-            movDir.X *= num;
-            movDir.Y *= num;
+            Vector2 vect = new Vector2(movDir.X, movDir.Y);
 
-            position += movDir * Globals.time * velocity * 2;
+            vect *= num;
+
+            position += vect * Globals.time * velocity * 2;
         }
 
         public override void Draw()
