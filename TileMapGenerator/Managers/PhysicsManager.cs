@@ -11,14 +11,10 @@ namespace ZombieGame.EnemyFiles
     internal class PhysicsManager
     {
         Player player;
-
         public PhysicsManager(Player player) 
         {
             this.player = player;
         }
-
-
-
         public void enemyMovement()
         {
             foreach (Enemy enemy in Enemy.enemyList.ToList())
