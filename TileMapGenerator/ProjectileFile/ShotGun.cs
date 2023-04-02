@@ -12,13 +12,9 @@ namespace ZombieGame.ProjectileFile
 {
     class ShotGun : Projectile
     {
-        Player player;
-        GraphicsDevice graphics;
+       
         public ShotGun(Player player , GraphicsDevice graphics) : base(player , graphics)
         {
-            this.player = player;
-            this.graphics = graphics;
-
             origin = new Vector2(position.X, position.Y);
         }
 
@@ -29,6 +25,7 @@ namespace ZombieGame.ProjectileFile
 
         public override void shooting()
         { 
+            GetPlayer.playerPos = origin;
             Vector2 mousePos = new Vector2(mousePosX, mousePosY);
             Vector2 movDir = mousePos - origin ;
 

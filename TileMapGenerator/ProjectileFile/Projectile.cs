@@ -20,7 +20,7 @@ namespace ZombieGame
         public Color[] textureData;
         public Texture2D projectileTexure;
         public Vector2 origin;
-        private Player GetPlayer;
+        public Player GetPlayer;
         public float mousePosX,mousePosY;
         Random rand= new Random();
         public static List<Projectile> projectileList = new List<Projectile>();
