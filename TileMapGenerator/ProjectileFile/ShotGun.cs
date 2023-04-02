@@ -25,7 +25,6 @@ namespace ZombieGame.ProjectileFile
 
         public override void shooting()
         { 
-            GetPlayer.playerPos = origin;
             Vector2 mousePos = new Vector2(mousePosX, mousePosY);
             Vector2 movDir = mousePos - origin ;
 
@@ -37,12 +36,9 @@ namespace ZombieGame.ProjectileFile
 
             position += vect * Globals.time * velocity * 2;
         }
-
         public override void Draw()
         {
             Globals.spriteBatch.Draw(projectileTexure, position, Color.Black);
         }
-
-
     }
 }
