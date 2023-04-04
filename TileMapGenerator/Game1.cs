@@ -15,7 +15,9 @@ namespace ZombieGame
         private GraphicsDeviceManager _graphics;
         private SpriteFont spriteFont;
         private Player player;
+        private bool hasThrownGrenade = false;
         private Projectile projectile;
+        float timer = 5;
         private EnemyManager enemyManager;
         PhysicsManager physicsManager;
 
@@ -59,6 +61,23 @@ namespace ZombieGame
                 Projectile shotGunProjectiles = new ShotGun(player, GraphicsDevice);
                 Projectile.projectileList.Add(shotGunProjectiles);
             }
+            if(Keyboard.GetState().IsKeyDown(Keys.G))
+            { 
+                timer -= Globals.time;
+                if (timer < 0)
+                {
+                hasThrownGrenade = true;
+                }
+            }
+
+            if(hasThrownGrenade)
+            {
+                Projectile grenade = new Grenade(player, GraphicsDevice);
+                Projectile.projectileList.Add(grenade);
+                hasThrownGrenade = false;
+            }
+
+
             Globals.Update(gameTime);
             enemyManager.Update(gameTime);
             InputManager.Update();

@@ -50,7 +50,10 @@ namespace ZombieGame.EnemyFiles
                     }
                     if(Projectile.projectileList.Count > 100)
                     {
+                        if(projectile.GetType() != typeof(Grenade))
+                        {
                         Projectile.projectileList.RemoveAt(0);
+                        }
                     }
                 }
             }

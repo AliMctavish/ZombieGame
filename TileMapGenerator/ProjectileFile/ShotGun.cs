@@ -35,9 +35,9 @@ namespace ZombieGame.ProjectileFile
 
             Vector2 vect = new Vector2(movDir.X, movDir.Y);
 
-            //vect *= unitVectorValue;
+            vect *= unitVectorValue;
 
-            position += vect *  unitVectorValue * Globals.time * velocity * 2;
+            position += vect * Globals.time * velocity * 2;
         }
         public override void Draw()
         {
