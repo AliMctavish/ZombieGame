@@ -32,19 +32,21 @@ namespace ZombieGame.EnemyFiles
                 }
                 foreach (Projectile projectile in Projectile.projectileList.ToList())
                 {
-                    if (Vector2.Distance(enemy.enemyPos, projectile.position) <= 50)
+                    if (Vector2.Distance(enemy.enemyPos, projectile.position) <= 30)
                     {
                         if(projectile.GetType() == typeof(Projectile))
                         {
                         Vector2 movDir = projectile.position + enemy.enemyPos; 
                         movDir.Normalize();
                         enemy.enemyPos += movDir ;
+                            Projectile.projectileList.Remove(projectile);
                         }
                         if(projectile.GetType() == typeof(ShotGun))
                         {
                         Vector2 movDir = projectile.position - enemy.enemyPos;
                         movDir.Normalize();
                         enemy.enemyPos -= movDir * 2;
+                        Projectile.projectileList.Remove(projectile);
                         }
                         enemy.Health -= 1;
                         if(enemy.Health <= 0)
