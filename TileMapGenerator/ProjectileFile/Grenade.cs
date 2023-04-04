@@ -43,6 +43,7 @@ namespace ZombieGame.ProjectileFile
             if(grenadeVelocity < 0)
             {
                 grenadeVelocity= 0 ;
+
                 projectileList.Remove(this);
             }
 

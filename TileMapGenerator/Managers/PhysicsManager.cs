@@ -20,6 +20,10 @@ namespace ZombieGame.EnemyFiles
         {
             foreach (Enemy enemy in Enemy.enemyList.ToList())
             {
+                if(Projectile.projectileList.Count == 0) 
+                {
+                enemy.Update(1, player, null);
+                }
                 if (Vector2.Distance(player.playerPos, enemy.enemyPos) >= 50)
                 {
                     Vector2 movDir = enemy.enemyPos - player.playerPos;
@@ -64,10 +68,11 @@ namespace ZombieGame.EnemyFiles
                     }
                     else
                     {
-                        enemy.Update(1, player, projectile);
+                        enemy.Update(1,player, null);
                     }
                 }
             }
+
         }
 
     
