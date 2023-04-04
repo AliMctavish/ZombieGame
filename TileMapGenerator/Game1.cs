@@ -63,18 +63,22 @@ namespace ZombieGame
             }
             if(Keyboard.GetState().IsKeyDown(Keys.G))
             { 
-                timer -= Globals.time;
-                if (timer < 0)
+                if (timer == 5)
                 {
                 hasThrownGrenade = true;
+                Projectile grenade = new Grenade(player, GraphicsDevice);
+                Projectile.projectileList.Add(grenade);
                 }
             }
 
             if(hasThrownGrenade)
             {
-                Projectile grenade = new Grenade(player, GraphicsDevice);
-                Projectile.projectileList.Add(grenade);
-                hasThrownGrenade = false;
+                timer -= Globals.time;
+                if(timer < 0)
+                {
+                    hasThrownGrenade = false;
+                    timer = 5;
+                }
             }
 
 

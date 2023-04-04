@@ -55,6 +55,15 @@ namespace ZombieGame.EnemyFiles
                         Projectile.projectileList.RemoveAt(0);
                         }
                     }
+                    if(projectile.GetType() == typeof(Grenade))
+                    {
+                        enemy.rotation = (float)Math.Atan2(projectile.position.Y - enemy.enemyPos.Y, projectile.position.X - enemy.enemyPos.X);
+                        Vector2 movDir = enemy.enemyPos - projectile.position;
+                        movDir.Normalize();
+                     
+                        
+                        enemy.enemyPos -= movDir * 2;
+                    }
                 }
             }
         }
