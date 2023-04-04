@@ -11,7 +11,7 @@ namespace ZombieGame.ProjectileFile
 {
     internal class Grenade : Projectile
     {
-        float grenadeVelocity = 150f;
+        public float grenadeVelocity = 200f;
 
         public Grenade(Player player , GraphicsDevice graphics) : base (player , graphics)
         {
@@ -37,6 +37,14 @@ namespace ZombieGame.ProjectileFile
             vect *= unitVectorValue;
 
             position += vect * Globals.time * grenadeVelocity;
+
+            grenadeVelocity -= 1 ;
+
+            if(grenadeVelocity < 0)
+            {
+                grenadeVelocity= 0 ;
+                projectileList.Remove(this);
+            }
 
             if(Vector2.Distance(position , mousePos) <= 10)
             {

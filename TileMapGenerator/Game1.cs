@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
+using System.Linq;
 using ZombieGame.EnemyFiles;
 using ZombieGame.Managers;
 using ZombieGame.ProjectileFile;
@@ -74,6 +75,7 @@ namespace ZombieGame
             if(hasThrownGrenade)
             {
                 timer -= Globals.time;
+
                 if(timer < 0)
                 {
                     hasThrownGrenade = false;
@@ -91,10 +93,7 @@ namespace ZombieGame
             {
                 //Projectile.projectileList.Clear();
             }
-            foreach(Enemy enemy in Enemy.enemyList)
-            {
-                enemy.Update(player);
-            }
+        
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)
@@ -107,7 +106,7 @@ namespace ZombieGame
             Globals.spriteBatch.DrawString(spriteFont, $"number of projectiles {Projectile.projectileList.Count}", new Vector2(50, 150), Color.White);
             enemyManager.Draw();
             player.Draw();
-            foreach(Projectile projectile in Projectile.projectileList)
+            foreach(Projectile projectile in Projectile.projectileList.ToList())
             {
                 projectile.Update();
                 projectile.Draw();

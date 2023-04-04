@@ -8,6 +8,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using ZombieGame.Managers;
+using ZombieGame.ProjectileFile;
 
 namespace ZombieGame.EnemyFiles
 {
@@ -32,9 +33,17 @@ namespace ZombieGame.EnemyFiles
             enemyTexture.SetData(textureData);
             origin = new Vector2(enemyTexture.Width / 2, enemyTexture.Height / 2);
         }
-        public void Update(Player player)
+      
+        public void Update(int type , Player player , Projectile grenade)
         {
+            if(type ==1)
+            {
             rotation = (float)Math.Atan2(player.playerPos.Y - enemyPos.Y, player.playerPos.X - enemyPos.X);
+            }
+            if(type ==2)
+            {
+            rotation = (float)Math.Atan2(grenade.position.Y - enemyPos.Y, grenade.position.X - enemyPos.X);
+            }
         }
         public void Draw()
         {
