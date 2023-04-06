@@ -35,7 +35,7 @@ namespace ZombieGame.Effects
         public void Update()
         {
             position = position + randomPosition;
-            PhysicsManager.OnExplotionEffect();
+            PhysicsManager.OnExplotionEffect(this);
         }
         public void Draw()
         {

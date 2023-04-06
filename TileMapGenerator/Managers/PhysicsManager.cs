@@ -14,7 +14,7 @@ namespace ZombieGame.EnemyFiles
     internal class PhysicsManager
     {
         Player player;
-        public PhysicsManager(Player player) 
+        public PhysicsManager(Player player)
         {
             this.player = player;
         }
@@ -22,9 +22,9 @@ namespace ZombieGame.EnemyFiles
         {
             foreach (Enemy enemy in Enemy.enemyList.ToList())
             {
-                if(Projectile.projectileList.Count == 0) 
+                if (Projectile.projectileList.Count == 0)
                 {
-                enemy.Update(1, player, null);
+                    enemy.Update(1, player, null);
                 }
                 if (Vector2.Distance(player.playerPos, enemy.enemyPos) >= 50)
                 {
@@ -36,39 +36,39 @@ namespace ZombieGame.EnemyFiles
                 {
                     if (Vector2.Distance(enemy.enemyPos, projectile.position) <= 30)
                     {
-                        if(projectile.GetType() == typeof(Projectile))
+                        if (projectile.GetType() == typeof(Projectile))
                         {
-                        Vector2 movDir = projectile.position - enemy.enemyPos; 
-                        movDir.Normalize();
-                        enemy.enemyPos -= movDir ;
-                        Projectile.projectileList.Remove(projectile);
+                            Vector2 movDir = projectile.position - enemy.enemyPos;
+                            movDir.Normalize();
+                            enemy.enemyPos -= movDir;
+                            Projectile.projectileList.Remove(projectile);
                         }
-                        if(projectile.GetType() == typeof(ShotGun))
+                        if (projectile.GetType() == typeof(ShotGun))
                         {
-                        Vector2 movDir = projectile.position - enemy.enemyPos;
-                        movDir.Normalize();
-                        enemy.enemyPos -= movDir * 2;
-                        Projectile.projectileList.Remove(projectile);
+                            Vector2 movDir = projectile.position - enemy.enemyPos;
+                            movDir.Normalize();
+                            enemy.enemyPos -= movDir * 2;
+                            Projectile.projectileList.Remove(projectile);
                         }
                         enemy.Health -= 1;
-                        if(enemy.Health <= 0)
+                        if (enemy.Health <= 0)
                         {
-                            for(int i = 0; i < 20; i++)
+                            for (int i = 0; i < 20; i++)
                             {
-                            var deadEffect = new DeadEffect();
-                            deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
+                                var deadEffect = new DeadEffect();
+                                deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
                             }
                             Enemy.enemyList.Remove(enemy);
                         }
                     }
-                    if(Projectile.projectileList.Count > 100)
+                    if (Projectile.projectileList.Count > 100)
                     {
-                        if(projectile.GetType() != typeof(Grenade))
+                        if (projectile.GetType() != typeof(Grenade))
                         {
-                        Projectile.projectileList.Remove(projectile);
+                            Projectile.projectileList.Remove(projectile);
                         }
                     }
-                    if(projectile.GetType() == typeof(Grenade))
+                    if (projectile.GetType() == typeof(Grenade))
                     {
                         enemy.Update(2, player, projectile);
                         Vector2 movDir = enemy.enemyPos - projectile.position;
@@ -77,31 +77,27 @@ namespace ZombieGame.EnemyFiles
                     }
                     else
                     {
-                        enemy.Update(1,player, null);
+                        enemy.Update(1, player, null);
                     }
                 }
             }
-
         }
-        public static void OnExplotionEffect()
+        public static void OnExplotionEffect(ExplosionEffect effect)
         {
-            foreach(var effect in ExplosionEffect.fragments.ToList())
+            foreach (var enemy in Enemy.enemyList.ToList())
             {
-                foreach(var enemy in Enemy.enemyList.ToList())
+                if (Vector2.Distance(effect.position, enemy.enemyPos) <= 50)
                 {
-                    if(Vector2.Distance(effect.position, enemy.enemyPos) <= 50)
+                    for (int i = 0; i < 20; i++)
                     {
-                        for (int i = 0; i < 20; i++)
-                        {
-                            var deadEffect = new DeadEffect();
-                            deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
-                        } 
-                        Enemy.enemyList.Remove(enemy);
+                        var deadEffect = new DeadEffect();
+                        deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
                     }
+                        Enemy.enemyList.Remove(enemy);
                 }
             }
         }
 
-    
+
     }
 }
