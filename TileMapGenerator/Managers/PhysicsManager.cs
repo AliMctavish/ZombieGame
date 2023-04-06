@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,10 +37,10 @@ namespace ZombieGame.EnemyFiles
                     {
                         if(projectile.GetType() == typeof(Projectile))
                         {
-                        Vector2 movDir = projectile.position + enemy.enemyPos; 
+                        Vector2 movDir = projectile.position - enemy.enemyPos; 
                         movDir.Normalize();
-                        enemy.enemyPos += movDir ;
-                            Projectile.projectileList.Remove(projectile);
+                        enemy.enemyPos -= movDir ;
+                        Projectile.projectileList.Remove(projectile);
                         }
                         if(projectile.GetType() == typeof(ShotGun))
                         {
@@ -51,7 +52,9 @@ namespace ZombieGame.EnemyFiles
                         enemy.Health -= 1;
                         if(enemy.Health <= 0)
                         {
-                        Enemy.enemyList.Remove(enemy);
+                            var deadEffect = new DeadEffect();
+                            deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
+                            Enemy.enemyList.Remove(enemy);
                         }
                     }
                     if(Projectile.projectileList.Count > 100)

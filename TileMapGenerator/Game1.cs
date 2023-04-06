@@ -15,6 +15,7 @@ namespace ZombieGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteFont spriteFont;
+        private DeadEffect deadEffect;
         private Player player;
         private bool hasThrownGrenade = false;
         private Projectile projectile;
@@ -35,6 +36,7 @@ namespace ZombieGame
             player = new Player(787,200, GraphicsDevice);
             Globals.graphics = GraphicsDevice;
             physicsManager = new PhysicsManager(player);
+            deadEffect = new DeadEffect();
             enemyManager = new EnemyManager();
             base.Initialize();
         }
@@ -110,6 +112,14 @@ namespace ZombieGame
             {
                 projectile.Update();
                 projectile.Draw();
+            }
+            if (DeadEffect.effects.Count > 0)
+            {
+                foreach (var effect in DeadEffect.effects.ToList())
+                {
+                    effect.Draw();
+
+                }
             }
             Globals.spriteBatch.End();
 
