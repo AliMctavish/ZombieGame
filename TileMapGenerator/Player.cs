@@ -17,10 +17,10 @@ namespace ZombieGame
         private Texture2D playerTexture { get; set; }
         public Vector2 playerPos { get; set; }
         private Vector2 origin { get; set; }
-        public float rotation;
-        float jumpTimer = 2;
+        public float Health { get; set; }
+        public float rotation { get; set; }
+        private Color[] texutreData { get; set; }
 
-        private Color[] texutreData;
         public Player(int posX , int posY , GraphicsDevice graphics)
         {
             playerPos= new Vector2(posX, posY);
