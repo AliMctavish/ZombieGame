@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZombieGame.Effects;
 using ZombieGame.Managers;
 
 namespace ZombieGame.ProjectileFile
@@ -43,7 +44,11 @@ namespace ZombieGame.ProjectileFile
             if(grenadeVelocity < 0)
             {
                 grenadeVelocity= 0 ;
-
+                for(int i = 0; i < 50; i++)
+                {
+                var explosionEffect = new ExplosionEffect();
+                explosionEffect.CreateExplotionEffect(position.X, position.Y);
+                }
                 projectileList.Remove(this);
             }
 

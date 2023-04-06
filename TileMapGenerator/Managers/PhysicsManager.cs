@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ZombieGame.Effects;
 using System.Threading.Tasks;
 using ZombieGame.Managers;
 using ZombieGame.ProjectileFile;
@@ -52,8 +53,11 @@ namespace ZombieGame.EnemyFiles
                         enemy.Health -= 1;
                         if(enemy.Health <= 0)
                         {
+                            for(int i = 0; i < 20; i++)
+                            {
                             var deadEffect = new DeadEffect();
                             deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
+                            }
                             Enemy.enemyList.Remove(enemy);
                         }
                     }
@@ -61,7 +65,7 @@ namespace ZombieGame.EnemyFiles
                     {
                         if(projectile.GetType() != typeof(Grenade))
                         {
-                        Projectile.projectileList.RemoveAt(0);
+                        Projectile.projectileList.Remove(projectile);
                         }
                     }
                     if(projectile.GetType() == typeof(Grenade))
@@ -78,6 +82,24 @@ namespace ZombieGame.EnemyFiles
                 }
             }
 
+        }
+        public static void OnExplotionEffect()
+        {
+            foreach(var effect in ExplosionEffect.fragments.ToList())
+            {
+                foreach(var enemy in Enemy.enemyList.ToList())
+                {
+                    if(Vector2.Distance(effect.position, enemy.enemyPos) <= 50)
+                    {
+                        for (int i = 0; i < 20; i++)
+                        {
+                            var deadEffect = new DeadEffect();
+                            deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
+                        }
+                        Enemy.enemyList.Remove(enemy);
+                    }
+                }
+            }
         }
 
     

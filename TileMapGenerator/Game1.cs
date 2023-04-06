@@ -2,8 +2,11 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
+using ZombieGame.Effects;
 using ZombieGame.EnemyFiles;
 using ZombieGame.Managers;
 using ZombieGame.ProjectileFile;
@@ -15,7 +18,7 @@ namespace ZombieGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteFont spriteFont;
-        private DeadEffect deadEffect;
+        private List<ExplosionEffect> explosionEffect = ExplosionEffect.fragments;
         private Player player;
         private bool hasThrownGrenade = false;
         private Projectile projectile;
@@ -36,7 +39,6 @@ namespace ZombieGame
             player = new Player(787,200, GraphicsDevice);
             Globals.graphics = GraphicsDevice;
             physicsManager = new PhysicsManager(player);
-            deadEffect = new DeadEffect();
             enemyManager = new EnemyManager();
             base.Initialize();
         }
@@ -73,19 +75,16 @@ namespace ZombieGame
                 Projectile.projectileList.Add(grenade);
                 }
             }
-
-            if(hasThrownGrenade)
+            if (hasThrownGrenade)
             {
                 timer -= Globals.time;
 
-                if(timer < 0)
+                if (timer < 0)
                 {
                     hasThrownGrenade = false;
                     timer = 5;
                 }
             }
-
-
             Globals.Update(gameTime);
             enemyManager.Update(gameTime);
             InputManager.Update();
@@ -93,37 +92,45 @@ namespace ZombieGame
             player.Update();
             if(Projectile.projectileList.Count > 2000)
             {
-                //Projectile.projectileList.Clear();
+                Projectile.projectileList.Clear();
             }
-        
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-            Globals.spriteBatch.Begin();
-            TileMap.Draw();
-            Globals.spriteBatch.DrawString(spriteFont, $"the rotation of object {Mouse.GetState().Position}", new Vector2(50, 50), Color.White);
-            Globals.spriteBatch.DrawString(spriteFont, $"player coordinate {player.playerPos}", new Vector2(50, 100), Color.White);
-            Globals.spriteBatch.DrawString(spriteFont, $"number of projectiles {Projectile.projectileList.Count}", new Vector2(50, 150), Color.White);
-            enemyManager.Draw();
-            player.Draw();
-            foreach(Projectile projectile in Projectile.projectileList.ToList())
-            {
-                projectile.Update();
-                projectile.Draw();
-            }
-            if (DeadEffect.effects.Count > 0)
-            {
-                foreach (var effect in DeadEffect.effects.ToList())
-                {
-                    effect.Draw();
-
-                }
-            }
-            Globals.spriteBatch.End();
-
-            base.Draw(gameTime);
+           GraphicsDevice.Clear(Color.Black);
+           Globals.spriteBatch.Begin();
+           TileMap.Draw();
+           foreach (var effect in DeadEffect.effects.ToList())
+           {
+           effect.Draw();
+           effect.Update();
+           }
+           if(DeadEffect.effects.Count > 1000)
+           {
+            DeadEffect.effects.Clear();
+           }
+           foreach(var effect in explosionEffect.ToList())
+           {
+           effect.Draw();
+           effect.Update();
+           }
+           if(explosionEffect.Count > 200)
+           {
+           explosionEffect.Clear();
+           }
+           Globals.spriteBatch.DrawString(spriteFont, $"the rotation of object {Mouse.GetState().Position}", new Vector2(50, 50), Color.White);
+           Globals.spriteBatch.DrawString(spriteFont, $"player coordinate {player.playerPos}", new Vector2(50, 100), Color.White);
+           Globals.spriteBatch.DrawString(spriteFont, $"number of projectiles {Projectile.projectileList.Count}", new Vector2(50, 150), Color.White);
+           enemyManager.Draw();
+           player.Draw();
+          foreach(Projectile projectile in Projectile.projectileList.ToList())
+          {
+            projectile.Update();
+            projectile.Draw();
+          }
+          Globals.spriteBatch.End();
+          base.Draw(gameTime);
         }
     }
 }
