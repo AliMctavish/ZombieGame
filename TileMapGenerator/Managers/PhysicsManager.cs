@@ -95,7 +95,7 @@ namespace ZombieGame.EnemyFiles
                         {
                             var deadEffect = new DeadEffect();
                             deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
-                        }
+                        } 
                         Enemy.enemyList.Remove(enemy);
                     }
                 }
