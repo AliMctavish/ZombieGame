@@ -31,10 +31,10 @@ namespace ZombieGame.EnemyFiles
                     Vector2 movDir = enemy.enemyPos - player.playerPos;
                     movDir.Normalize();
                     enemy.enemyPos -= movDir;
-                    if(Vector2.Distance(player.playerPos , enemy.enemyPos) <= 50)
-                    {
-                        player.Health -= 1;
-                    }
+                }
+                if (Vector2.Distance(player.playerPos, enemy.enemyPos) <= 50)
+                {
+                    Player.Health -= 1;
                 }
                 foreach (Projectile projectile in Projectile.projectileList.ToList())
                 {

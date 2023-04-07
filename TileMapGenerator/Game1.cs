@@ -21,7 +21,6 @@ namespace ZombieGame
         private List<ExplosionEffect> explosionEffect = ExplosionEffect.fragments;
         private Player player;
         private bool hasThrownGrenade = false;
-        private Projectile projectile;
         float timer = 5;
         private EnemyManager enemyManager;
         PhysicsManager physicsManager;
@@ -56,36 +55,39 @@ namespace ZombieGame
             //    TileMap.tileList.Clear();
             //    TileMap.tileGenerator(Content);
             //}
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if(Player.Health > 0)
             {
-                Projectile projectile = new Projectile(player, GraphicsDevice);
-                Projectile.projectileList.Add(projectile);
-            } 
-            if (Mouse.GetState().RightButton == ButtonState.Pressed)
-            {
-                Projectile shotGunProjectiles = new ShotGun(player, GraphicsDevice);
-                Projectile.projectileList.Add(shotGunProjectiles);
-            }
-            if(Keyboard.GetState().IsKeyDown(Keys.G))
-            { 
-                if (timer == 5)
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                 {
-                hasThrownGrenade = true;
-                Projectile grenade = new Grenade(player, GraphicsDevice);
-                Projectile.projectileList.Add(grenade);
+                    Projectile projectile = new Projectile(player, GraphicsDevice);
+                    Projectile.projectileList.Add(projectile);
                 }
-            }
-            if (hasThrownGrenade)
-            {
-                timer -= Globals.time;
+                if (Mouse.GetState().RightButton == ButtonState.Pressed)
+                {
+                    Projectile shotGunProjectiles = new ShotGun(player, GraphicsDevice);
+                    Projectile.projectileList.Add(shotGunProjectiles);
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.G))
+                {
+                    if (timer == 5)
+                    {
+                        hasThrownGrenade = true;
+                        Projectile grenade = new Grenade(player, GraphicsDevice);
+                        Projectile.projectileList.Add(grenade);
+                    }
+                }
+                if (hasThrownGrenade)
+                {
+                    timer -= Globals.time;
 
-                if (timer < 0)
-                {
-                    hasThrownGrenade = false;
-                    timer = 5;
+                    if (timer < 0)
+                    {
+                        hasThrownGrenade = false;
+                        timer = 5;
+                    }
                 }
-            }
             Globals.Update(gameTime);
+            }
             enemyManager.Update(gameTime);
             InputManager.Update();
             physicsManager.enemyMovement();
@@ -121,6 +123,7 @@ namespace ZombieGame
            }
            Globals.spriteBatch.DrawString(spriteFont, $"the rotation of object {Mouse.GetState().Position}", new Vector2(50, 50), Color.White);
            Globals.spriteBatch.DrawString(spriteFont, $"player coordinate {player.playerPos}", new Vector2(50, 100), Color.White);
+           Globals.spriteBatch.DrawString(spriteFont, $"player Health : {Player.Health}", new Vector2(50, 10), Color.PapayaWhip);
            Globals.spriteBatch.DrawString(spriteFont, $"number of projectiles {Projectile.projectileList.Count}", new Vector2(50, 150), Color.White);
            enemyManager.Draw();
            player.Draw();

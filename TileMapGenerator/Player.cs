@@ -17,7 +17,7 @@ namespace ZombieGame
         private Texture2D playerTexture { get; set; }
         public Vector2 playerPos { get; set; }
         private Vector2 origin { get; set; }
-        public float Health { get; set; }
+        public static float Health = 100;
         public float rotation { get; set; }
         private Color[] texutreData { get; set; }
 
