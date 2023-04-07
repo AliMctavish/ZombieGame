@@ -14,14 +14,22 @@ namespace ZombieGame.EnemyFiles
     {
         Random rnd = new Random();
         float spawnTime = 2f;
+        float difficulityTimer = 10f;
+        float spawnRate = 2f;
         public void Update(GameTime gameTime)
         {
             spawnTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            difficulityTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (spawnTime <= 0)
             {
                 Enemy enemy = new Enemy(rnd.Next(0, 1200), rnd.Next(0, 600));
                 Enemy.enemyList.Add(enemy);
-                spawnTime = 2f;
+                spawnTime = spawnRate;
+            }
+            if(difficulityTimer <= 0)
+            {
+                spawnRate -= 0.1f;
+                difficulityTimer = 10f;
             }
         }
         public void Draw()
