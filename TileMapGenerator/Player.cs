@@ -21,10 +21,6 @@ namespace ZombieGame
         private Vector2 origin { get; set; }
         public static float Health = 100;
         public float rotation { get; set; }
-
-        public ContentManager _content;
-        private Color[] texutreData { get; set; }
-
         public Player(int posX , int posY , GraphicsDevice graphics)
         {
             playerPos= new Vector2(posX, posY);
@@ -39,7 +35,7 @@ namespace ZombieGame
         }
         public void Draw()
         {
-            Globals.spriteBatch.Draw(playerTexture, playerPos, null, Color.White, rotation , origin  , 1.5f, SpriteEffects.None , 0f);
+            Globals.spriteBatch.Draw(playerTexture, playerPos, null, Color.White, rotation , origin  , 0.4f, SpriteEffects.None , 0f);
         }
     }
 }
