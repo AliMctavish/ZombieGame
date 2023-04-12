@@ -35,6 +35,7 @@ namespace ZombieGame
         }
         protected override void Initialize()
         {
+            Globals.content = Content;
             player = new Player(787,200, GraphicsDevice);
             Globals.graphics = GraphicsDevice;
             physicsManager = new PhysicsManager(player);
@@ -86,8 +87,8 @@ namespace ZombieGame
                         timer = 5;
                     }
                 }
-            Globals.Update(gameTime);
             }
+            Globals.Update(gameTime);
             enemyManager.Update(gameTime);
             InputManager.Update();
             physicsManager.enemyMovement();

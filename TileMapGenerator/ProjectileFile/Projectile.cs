@@ -28,13 +28,12 @@ namespace ZombieGame
         public Projectile(Player player , GraphicsDevice graphics)
         {
             GetPlayer = player;
-            position= new Vector2(player.playerPos.X , player.playerPos.Y) ;
-            textureData = new Color[20 * 20];
-            projectileTexure = new Texture2D(graphics,20,20);
-            Color randomColor = colors[rand.Next(0,3)];
+            position= new Vector2(player.playerPos.X, player.playerPos.Y ) ;
+            textureData = new Color[5 * 5];
+            projectileTexure = new Texture2D(graphics,5,5);
             for(int i = 0; i < textureData.Length; i++)
             {
-                textureData[i] = randomColor;    
+                textureData[i] = Color.Orange;    
             }
             projectileTexure.SetData(textureData);
             mousePosX = Mouse.GetState().X ;

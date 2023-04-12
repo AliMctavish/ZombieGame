@@ -46,7 +46,7 @@ namespace ZombieGame.EnemyFiles
                             movDir.Normalize();
                             enemy.enemyPos -= movDir;
                             Projectile.projectileList.Remove(projectile);
-                        enemy.Health -= 1;
+                        enemy.Health -= 5;
                         }
                         if (projectile.GetType() == typeof(ShotGun))
                         {
@@ -54,7 +54,7 @@ namespace ZombieGame.EnemyFiles
                             movDir.Normalize();
                             enemy.enemyPos -= movDir * 2;
                             Projectile.projectileList.Remove(projectile);
-                            enemy.Health -= 5;
+                            enemy.Health -= 3;
                         }
                         if (enemy.Health <= 0)
                         {
