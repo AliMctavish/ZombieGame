@@ -3,12 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
 using ZombieGame.Managers;
 
 namespace ZombieGame
@@ -20,11 +14,18 @@ namespace ZombieGame
         public Vector2 playerPos { get; set; }
         private Vector2 origin { get; set; }
         public static float Health = 100;
+        Color[] textureData;
         public float rotation { get; set; }
         public Player(int posX , int posY , GraphicsDevice graphics)
         {
             playerPos= new Vector2(posX, posY);
-            playerTexture = Globals.content.Load<Texture2D>("char4");
+            playerTexture = new Texture2D(graphics, 50, 50);
+            textureData = new Color[50 * 50];
+            for (int i = 0; i < textureData.Length; i++)
+            {
+                textureData[i] = Color.White;
+            }
+            playerTexture.SetData(textureData);
             origin = new Vector2(playerTexture.Width / 2, playerTexture.Height / 2);
         }
         public void Update()
@@ -35,7 +36,7 @@ namespace ZombieGame
         }
         public void Draw()
         {
-            Globals.spriteBatch.Draw(playerTexture, playerPos, null, Color.White, rotation , origin  , 0.4f, SpriteEffects.None , 0f);
+            Globals.spriteBatch.Draw(playerTexture, playerPos, null, Color.White, rotation , origin  , 0.9f, SpriteEffects.None , 0f);
         }
     }
 }
