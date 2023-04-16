@@ -126,6 +126,7 @@ namespace ZombieGame
            Globals.spriteBatch.DrawString(spriteFont, $"player coordinate {player.playerPos}", new Vector2(50, 100), Color.White);
            Globals.spriteBatch.DrawString(spriteFont, $"player Health : {Player.Health}", new Vector2(50, 10), Color.PapayaWhip);
            Globals.spriteBatch.DrawString(spriteFont, $"number of projectiles {Projectile.projectileList.Count}", new Vector2(50, 150), Color.White);
+           Globals.spriteBatch.DrawString(spriteFont, $"enemy details {Enemy.enemyList.Count()}", new Vector2(50, 200), Color.White);
            enemyManager.Draw();
            player.Draw();
           foreach(Projectile projectile in Projectile.projectileList.ToList())

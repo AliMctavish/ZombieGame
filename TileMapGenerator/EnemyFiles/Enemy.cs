@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ZombieGame.Managers;
 using ZombieGame.ProjectileFile;
@@ -43,6 +44,19 @@ namespace ZombieGame.EnemyFiles
             if(type ==2)
             {
             rotation = (float)Math.Atan2(grenade.position.Y - enemyPos.Y, grenade.position.X - enemyPos.X);
+            }
+
+            foreach(Enemy enemy in enemyList)
+            {
+               if(this != enemy)
+                {
+                    if (Vector2.Distance(enemyPos, enemy.enemyPos) < 50)
+                    {
+                        Vector2 movDir = enemy.enemyPos - enemyPos;
+                        movDir.Normalize();
+                        enemy.enemyPos += movDir;
+                    }
+                }
             }
         }
         public void Draw()
