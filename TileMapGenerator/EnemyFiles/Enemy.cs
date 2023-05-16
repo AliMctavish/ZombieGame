@@ -19,13 +19,16 @@ namespace ZombieGame.EnemyFiles
         public Texture2D enemyTexture;
         private Color[] textureData;
         public float rotation;
+        int i = 5;
         public float Health = 100;
+        float timer = 5 ;
         private Vector2 origin;
         public static List<Enemy> enemyList = new List<Enemy>();
         public Enemy(int posX, int posY)
         {
             enemyPos = new Vector2(posX, posY);
 
+          
             enemyTexture = Globals.content.Load<Texture2D>("zombie1");
 
 
@@ -41,6 +44,7 @@ namespace ZombieGame.EnemyFiles
       
         public void Update(int type , Player player , Projectile grenade)
         {
+
             if(type ==1)
             {
             rotation = (float)Math.Atan2(player.playerPos.Y - enemyPos.Y, player.playerPos.X - enemyPos.X);
@@ -49,8 +53,20 @@ namespace ZombieGame.EnemyFiles
             {
             rotation = (float)Math.Atan2(grenade.position.Y - enemyPos.Y, grenade.position.X - enemyPos.X);
             }
+            
+            enemyTexture = Globals.content.Load<Texture2D>($"zombie{i}");
 
-            foreach(Enemy enemy in enemyList)
+            timer -= i;
+
+            if (timer <= 0)
+            { timer = 15; i--; }
+           
+            if(i == 1)
+            { timer = 15; i = 5;}
+
+          
+
+            foreach (Enemy enemy in enemyList)
             {
                if(this != enemy)
                 {
