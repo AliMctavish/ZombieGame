@@ -19,13 +19,15 @@ namespace ZombieGame
         public Player(int posX , int posY , GraphicsDevice graphics)
         {
             playerPos= new Vector2(posX, posY);
-            playerTexture = new Texture2D(graphics, 50, 50);
-            textureData = new Color[50 * 50];
-            for (int i = 0; i < textureData.Length; i++)
-            {
-                textureData[i] = Color.White;
-            }
-            playerTexture.SetData(textureData);
+            playerTexture = Globals.content.Load<Texture2D>("Drawing 49");
+
+            //playerTexture = new Texture2D(graphics, 50, 50);
+            //textureData = new Color[50 * 50];
+            //for (int i = 0; i < textureData.Length; i++)
+            //{
+            //    textureData[i] = Color.White;
+            //}
+            //playerTexture.SetData(textureData);
             origin = new Vector2(playerTexture.Width / 2, playerTexture.Height / 2);
         }
         public void Update()
@@ -33,10 +35,21 @@ namespace ZombieGame
             MouseState mouseState = Mouse.GetState();
             rotation = (float)Math.Atan2(mouseState.Y - playerPos.Y, mouseState.X - playerPos.X);
             playerPos = InputManager.move * Globals.time * speed;
+
+            if(InputManager.isMoving)
+            {
+                for(int i = 49; i <= 53; i++)
+                {
+                playerTexture = Globals.content.Load<Texture2D>($"Drawing {i}");
+                }
+                
+            }
+
+
         }
         public void Draw()
         {
-            Globals.spriteBatch.Draw(playerTexture, playerPos, null, Color.White, rotation , origin  , 0.9f, SpriteEffects.None , 0f);
+            Globals.spriteBatch.Draw(playerTexture, playerPos, null, Color.White, rotation , origin  , 2f, SpriteEffects.FlipHorizontally , 0f);
         }
     }
 }
