@@ -29,14 +29,14 @@ namespace ZombieGame.Effects
             textureData = new Color[15 * 15];
             for (int i = 0; i < textureData.Length; i++)
             {
-                textureData[i] = Color.Orange;
+                textureData[i] = Color.Red;
             }
             effectTexture.SetData(textureData);
             effects.Add(this);
         }
         public void Update()
         {
-            effectPos = effectPos + randomPosition;
+            effectPos = effectPos  + randomPosition;
         }
         public void Draw()
         {

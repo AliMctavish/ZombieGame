@@ -17,7 +17,7 @@ namespace ZombieGame
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteFont spriteFont;
+        private SpriteFont spriteFont; 
         private List<ExplosionEffect> explosionEffect = ExplosionEffect.fragments;
         private Player player;
         private bool hasThrownGrenade = false;
@@ -92,6 +92,7 @@ namespace ZombieGame
             enemyManager.Update(gameTime);
             InputManager.Update();
             physicsManager.enemyMovement();
+            AnimationManager.animateEnemy();
             player.Update();
             if(Projectile.projectileList.Count > 2000)
             {
