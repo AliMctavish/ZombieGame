@@ -40,6 +40,8 @@ namespace ZombieGame.EnemyFiles
                 {
                     if (Vector2.Distance(enemy.enemyPos, projectile.position) <= 30)
                     {
+                        var effect = new DeadEffect();
+                        effect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y,5);
                         if (projectile.GetType() == typeof(Projectile))
                         {
                             Vector2 movDir = projectile.position - enemy.enemyPos;
@@ -54,6 +56,7 @@ namespace ZombieGame.EnemyFiles
                             movDir.Normalize();
                             enemy.enemyPos -= movDir * 2;
                             Projectile.projectileList.Remove(projectile);
+                           
                             enemy.Health -= 3;
                         }
                         if (enemy.Health <= 0)
@@ -61,7 +64,7 @@ namespace ZombieGame.EnemyFiles
                             for (int i = 0; i < 20; i++)
                             {
                                 var deadEffect = new DeadEffect();
-                                deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
+                                deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y,15);
                             }
                             Enemy.enemyList.Remove(enemy);
                         }
@@ -96,7 +99,7 @@ namespace ZombieGame.EnemyFiles
                     for (int i = 0; i < 20; i++)
                     {
                         var deadEffect = new DeadEffect();
-                        deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y);
+                        deadEffect.CreateDeadEffect(enemy.enemyPos.X, enemy.enemyPos.Y,15);
                     }
                         Enemy.enemyList.Remove(enemy);
                 }

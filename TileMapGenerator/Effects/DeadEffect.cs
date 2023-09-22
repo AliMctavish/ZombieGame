@@ -20,13 +20,13 @@ namespace ZombieGame.Effects
         public Color[] textureData;
         Vector2 randomPosition;
         public static List<DeadEffect> effects = new List<DeadEffect>();
-        public void CreateDeadEffect(float posX, float posY)
+        public void CreateDeadEffect(float posX, float posY , int size)
         {
             effectPos.X = posX;
             effectPos.Y = posY;
-            randomPosition = new Vector2(rand.Next(-8, 8), rand.Next(-8, 8));
-            effectTexture = new Texture2D(Globals.graphics, 15, 15);
-            textureData = new Color[15 * 15];
+            randomPosition = new Vector2(rand.Next(-5, 5), rand.Next(-5, 5));
+            effectTexture = new Texture2D(Globals.graphics, size, size);
+            textureData = new Color[size * size];
             for (int i = 0; i < textureData.Length; i++)
             {
                 textureData[i] = Color.Red;
