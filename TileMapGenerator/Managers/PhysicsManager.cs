@@ -8,6 +8,7 @@ using ZombieGame.Effects;
 using System.Threading.Tasks;
 using ZombieGame.Managers;
 using ZombieGame.ProjectileFile;
+using ZombieGame.Items;
 
 namespace ZombieGame.EnemyFiles
 {
@@ -24,7 +25,7 @@ namespace ZombieGame.EnemyFiles
             {
                 if (Projectile.projectileList.Count == 0)
                 {
-                    enemy.Update(1, player, null);
+                    enemy.Update(TargetType.Player, player, null);
                 }
                 if (Vector2.Distance(player.playerPos, enemy.enemyPos) >= 50)
                 {
@@ -78,18 +79,26 @@ namespace ZombieGame.EnemyFiles
                     }
                     if (projectile.GetType() == typeof(Grenade))
                     {
-                        enemy.Update(2, player, projectile);
+                        enemy.Update(TargetType.Bomb, player, projectile);
                         Vector2 movDir = enemy.enemyPos - projectile.position;
                         movDir.Normalize();
                         enemy.enemyPos -= movDir * 2;
                     }
                     else
                     {
-                        enemy.Update(1, player, null);
+                        enemy.Update(TargetType.Player, player, null);
                     }
                 }
             }
         }
+
+        public void TakeAmmo()
+        {
+            foreach (var ammo in Ammo.Ammos.ToList())
+                ammo.Update(player);
+        }
+
+
         public static void OnExplotionEffect(ExplosionEffect effect)
         {
             foreach (var enemy in Enemy.enemyList.ToList())

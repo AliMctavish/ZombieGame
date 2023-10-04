@@ -19,7 +19,6 @@ namespace ZombieGame
         private Vector2 origin { get; set; }
         private readonly GraphicsDevice graphicsDevice;
         public static float Health = 100;
-        Color[] textureData;
         public float rotation { get; set; }
         public Player(int posX, int posY, GraphicsDevice graphics)
         {
@@ -80,11 +79,6 @@ namespace ZombieGame
                         Projectile.Ammo -= 1;
                     }
                 }
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
-            {
-                Projectile.Ammo = 100;
             }
         }
         public void Draw()

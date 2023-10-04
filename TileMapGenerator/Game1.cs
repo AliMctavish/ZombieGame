@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using ZombieGame.Effects;
 using ZombieGame.EnemyFiles;
+using ZombieGame.Items;
 using ZombieGame.Managers;
 using ZombieGame.ProjectileFile;
 using Enemy = ZombieGame.EnemyFiles.Enemy;
@@ -22,6 +23,8 @@ namespace ZombieGame
         private Player player;
         private Renderer renderer;
         private EnemyManager enemyManager;
+        private Ammo ammo;
+
         PhysicsManager physicsManager;
 
         public Game1()
@@ -35,6 +38,7 @@ namespace ZombieGame
         protected override void Initialize()
         {
             Globals.content = Content;
+            ammo = new Ammo();
             player = new Player(787, 200, GraphicsDevice);
             Globals.graphics = GraphicsDevice;
             physicsManager = new PhysicsManager(player);
@@ -57,6 +61,7 @@ namespace ZombieGame
             enemyManager.Update(gameTime);
             InputManager.Update();
             physicsManager.enemyMovement();
+            physicsManager.TakeAmmo();
             AnimationManager.animateEnemy();
             player.Update();
             if (Projectile.projectileList.Count > 2000)
@@ -70,6 +75,10 @@ namespace ZombieGame
             GraphicsDevice.Clear(Color.Black);
             Globals.spriteBatch.Begin();
             TileMap.Draw();
+
+            foreach(var ammo in Ammo.Ammos.ToList())
+                ammo.Draw();
+
             foreach (var effect in DeadEffect.effects.ToList())
             {
                 effect.Draw();
