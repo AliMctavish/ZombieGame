@@ -20,8 +20,7 @@ namespace ZombieGame
         private SpriteFont spriteFont;
         private List<ExplosionEffect> explosionEffect = ExplosionEffect.fragments;
         private Player player;
-        private bool hasThrownGrenade = false;
-        float timer = 5;
+        private Renderer renderer;
         private EnemyManager enemyManager;
         PhysicsManager physicsManager;
 
@@ -40,6 +39,7 @@ namespace ZombieGame
             Globals.graphics = GraphicsDevice;
             physicsManager = new PhysicsManager(player);
             enemyManager = new EnemyManager();
+            renderer = new Renderer();
             base.Initialize();
         }
         protected override void LoadContent()
@@ -51,46 +51,8 @@ namespace ZombieGame
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
-            //if(Keyboard.GetState().IsKeyDown(Keys.Space))
-            //{
-            //    TileMap.tileList.Clear();
-            //    TileMap.tileGenerator(Content);
-            //}
-            if (Player.Health > 0 && Projectile.Ammo > 0)
-            {
-                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-                {
-                    Projectile projectile = new Projectile(player, GraphicsDevice);
-                    Projectile.projectileList.Add(projectile);
-                    Projectile.Ammo -= 1;
-                }
-                if (Mouse.GetState().RightButton == ButtonState.Pressed)
-                {
-                    Projectile shotGunProjectiles = new ShotGun(player, GraphicsDevice);
-                    Projectile.projectileList.Add(shotGunProjectiles);
-                    Projectile.Ammo -= 1;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.G))
-                {
-                    if (timer == 5)
-                    {
-                        hasThrownGrenade = true;
-                        Projectile grenade = new Grenade(player, GraphicsDevice);
-                        Projectile.projectileList.Add(grenade);
-                    }
-                }
-                if (hasThrownGrenade)
-                {
-                    timer -= Globals.time;
 
-                    if (timer < 0)
-                    {
-                        hasThrownGrenade = false;
-                        timer = 5;
-                        Projectile.Ammo -= 1;
-                    }
-                }
-            }
+            player.PlayerControllers();
             Globals.Update(gameTime);
             enemyManager.Update(gameTime);
             InputManager.Update();
@@ -114,9 +76,8 @@ namespace ZombieGame
                 effect.Update();
             }
             if (DeadEffect.effects.Count > 1000)
-            {
                 DeadEffect.effects.Clear();
-            }
+
             foreach (var effect in explosionEffect.ToList())
             {
                 effect.Draw();
@@ -126,12 +87,7 @@ namespace ZombieGame
             {
                 explosionEffect.Clear();
             }
-            Globals.spriteBatch.DrawString(spriteFont, $"the rotation of object {Mouse.GetState().Position}", new Vector2(50, 50), Color.White);
-            Globals.spriteBatch.DrawString(spriteFont, $"player coordinate {player.playerPos}", new Vector2(50, 100), Color.White);
-            Globals.spriteBatch.DrawString(spriteFont, $"player Health : {Player.Health}", new Vector2(50, 10), Color.PapayaWhip);
-            Globals.spriteBatch.DrawString(spriteFont, $"number of projectiles {Projectile.projectileList.Count}", new Vector2(50, 150), Color.White);
-            Globals.spriteBatch.DrawString(spriteFont, $"enemy count :  {Enemy.enemyList.Count()}", new Vector2(50, 200), Color.White);
-            Globals.spriteBatch.DrawString(spriteFont, $"ammo amount : {Projectile.Ammo}", new Vector2(50, 220), Color.White);
+            renderer.GuiDebugger(spriteFont, player);
             enemyManager.Draw();
             player.Draw();
 

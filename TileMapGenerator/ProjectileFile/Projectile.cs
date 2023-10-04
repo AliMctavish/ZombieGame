@@ -15,6 +15,9 @@ namespace ZombieGame
 {
     internal class Projectile
     {
+        /// <summary>
+        /// PUBLIC MODIFYERS FOR THE PROJECTILE
+        /// </summary>
         public Vector2 position;
         public float velocity = 1000f;
         public Color[] textureData;
@@ -22,10 +25,13 @@ namespace ZombieGame
         public Vector2 origin;
         public Player GetPlayer;
         public float mousePosX, mousePosY;
-        public static int Ammo = 100;
         Random rand = new Random();
-        public static List<Projectile> projectileList = new List<Projectile>();
         List<Color> colors = new List<Color>() { Color.Red, Color.Blue, Color.Yellow, Color.Black };
+
+        //global statics
+        public static int Ammo = 100;
+        public static List<Projectile> projectileList = new List<Projectile>();
+
         public Projectile(Player player, GraphicsDevice graphics)
         {
             GetPlayer = player;
