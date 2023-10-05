@@ -12,7 +12,6 @@ namespace ZombieGame.ProjectileFile
 {
     class ShotGun : Projectile
     {
-       
         public ShotGun(Player player , GraphicsDevice graphics) : base(player , graphics)
         {
             origin = new Vector2(position.X, position.Y);
