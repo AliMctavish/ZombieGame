@@ -1,17 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection.Metadata;
 using ZombieGame.Effects;
 using ZombieGame.EnemyFiles;
 using ZombieGame.Items;
 using ZombieGame.Managers;
-using ZombieGame.ProjectileFile;
-using Enemy = ZombieGame.EnemyFiles.Enemy;
 
 namespace ZombieGame
 {
@@ -23,7 +18,6 @@ namespace ZombieGame
         private Player player;
         private Renderer renderer;
         private EnemyManager enemyManager;
-        private Ammo ammo;
 
         PhysicsManager physicsManager;
 
@@ -38,7 +32,6 @@ namespace ZombieGame
         protected override void Initialize()
         {
             Globals.content = Content;
-            ammo = new Ammo();
             player = new Player(787, 200, GraphicsDevice);
             Globals.graphics = GraphicsDevice;
             physicsManager = new PhysicsManager(player);
@@ -57,6 +50,7 @@ namespace ZombieGame
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
 
             player.PlayerControllers();
+            Ammo.UpdateList();
             Globals.Update(gameTime);
             enemyManager.Update(gameTime);
             InputManager.Update();

@@ -18,7 +18,7 @@ namespace ZombieGame
         //why i should return tile rather than void method ? 
          public Tile TileTexture(int tileIndex, Vector2 tilePos, ContentManager content)
         {
-            tileTexture = content.Load<Texture2D>($"Tiles/tile{tileIndex}");
+            tileTexture = content.Load<Texture2D>($"Grass_Ground_Texture{tileIndex}");
             this.tilePos = tilePos;
             return this;
         }

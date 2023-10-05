@@ -13,8 +13,12 @@ using ZombieGame.Managers;
 
 namespace ZombieGame
 {
-    internal class Projectile
+    public class Projectile
     {
+        //global statics
+        public static int Ammo = 100;
+        public static List<Projectile> projectileList = new List<Projectile>();
+
         /// <summary>
         /// PUBLIC MODIFYERS FOR THE PROJECTILE
         /// </summary>
@@ -28,10 +32,11 @@ namespace ZombieGame
         Random rand = new Random();
         List<Color> colors = new List<Color>() { Color.Red, Color.Blue, Color.Yellow, Color.Black };
 
-        //global statics
-        public static int Ammo = 100;
-        public static List<Projectile> projectileList = new List<Projectile>();
-
+        /// <summary>
+        /// //
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="graphics"></param>
         public Projectile(Player player, GraphicsDevice graphics)
         {
             GetPlayer = player;
@@ -52,6 +57,7 @@ namespace ZombieGame
         {
             shooting();
         }
+
         public virtual void shooting()
         {
             Vector2 mousePos = new Vector2(mousePosX, mousePosY);
