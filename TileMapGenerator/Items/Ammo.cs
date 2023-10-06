@@ -13,7 +13,7 @@ namespace ZombieGame.Items
         private Texture2D _texutre;
         private Vector2 _position;
         private float _size = 0.1f;
-        private Random rand; 
+        private Random _rand; 
 
         /// <summary>
         /// STATIC FIELDS
@@ -23,9 +23,9 @@ namespace ZombieGame.Items
         public static List<Ammo> Ammos = new List<Ammo>();
         public Ammo()
         {
-            rand = new Random();    
+            _rand = new Random();    
             _texutre = Globals.content.Load<Texture2D>("bullets");
-            _position = new Vector2(rand.Next(1,1200), rand.Next(1,600));
+            _position = new Vector2(_rand.Next(1,1200), _rand.Next(1,600));
             Ammos.Add(this);
         }
 

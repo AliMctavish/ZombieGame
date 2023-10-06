@@ -58,7 +58,7 @@ namespace ZombieGame.EnemyFiles
                             enemy.enemyPos -= movDir * 2;
                             Projectile.projectileList.Remove(projectile);
                            
-                            enemy.Health -= 3;
+                            enemy.Health -= 10;
                         }
                         if (enemy.Health <= 0)
                         {
